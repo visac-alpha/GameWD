@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+*.log
+_extract_*.js
+_gen_*.js
+_pk_*.js
+_eng_*.js
+node_modules/
+.env
+.env.*

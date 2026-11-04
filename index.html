@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GameWD · 收藏清单</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1>收藏清单</h1>
+        <p class="subtitle">条幅可折叠 · 每种颜色单独一行 · 数字按颜色高亮</p>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" id="btn-edit-mode" class="btn btn-ghost">编辑模式</button>
+        <button type="button" id="btn-mark-mode" class="btn btn-ghost">标记模式</button>
+        <button type="button" id="btn-compare-mode" class="btn btn-ghost">比较模式</button>
+        <button type="button" id="btn-restore-seed" class="btn btn-ghost" title="从项目内备份恢复各色数值与勾选">恢复颜色</button>
+        <button type="button" id="btn-add-section" class="btn btn-primary">添加条幅</button>
+      </div>
+    </header>
+
+    <section id="compare-bar" class="compare-bar">
+      <label class="compare-field">
+        <span>生命</span>
+        <input id="compare-hp" type="number" min="0" step="1" placeholder="角色生命" />
+      </label>
+      <label class="compare-field">
+        <span>攻击</span>
+        <input id="compare-atk" type="number" min="0" step="1" placeholder="角色攻击力" />
+      </label>
+      <label class="compare-field">
+        <span>PVP回合</span>
+        <input id="compare-turns" type="number" min="1" max="15" step="1" placeholder="10" />
+      </label>
+      <label class="compare-field">
+        <span>敌人减伤%</span>
+        <input id="compare-dr" type="number" min="0" max="100" step="1" placeholder="0" />
+      </label>
+      <p class="compare-hint">左边不排名：造成伤害显示伤害值，加攻显示提升的攻击，伤害百分比按总回合平均。右边生命仍在条幅内排名。闪避不计入。</p>
+    </section>
+
+    <main id="sections" class="sections"></main>
+  </div>
+
+  <!-- 编辑项目弹窗 -->
+  <dialog id="item-dialog" class="dialog">
+    <form method="dialog" id="item-form" class="dialog-body">
+      <h2 id="item-dialog-title">编辑项目</h2>
+
+      <label class="field">
+        <span>文案</span>
+        <textarea id="item-text" required maxlength="200" rows="3" placeholder="例如：【唯一】佩戴6个[连击宝石]时…"></textarea>
+      </label>
+
+      <p class="hint">勾选颜色并填写数值。启用几种颜色，这一条就展示几行；未勾选的颜色不显示。</p>
+
+      <div class="color-editors" id="color-editors"></div>
+
+      <div class="dialog-actions">
+        <button type="button" id="item-cancel" class="btn btn-ghost" value="cancel">取消</button>
+        <button type="submit" class="btn btn-primary" value="save">保存</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 编辑条幅弹窗 -->
+  <dialog id="section-dialog" class="dialog">
+    <form method="dialog" id="section-form" class="dialog-body">
+      <h2>编辑条幅</h2>
+      <label class="field">
+        <span>条幅标题</span>
+        <input type="text" id="section-title" required maxlength="60" placeholder="例如：第一期活动" />
+      </label>
+      <div class="dialog-actions">
+        <button type="button" id="section-cancel" class="btn btn-ghost">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="checklist-seed.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
